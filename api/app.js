@@ -32,5 +32,4 @@ app.use(express.urlencoded({
 app.use('/home',homeRoutes)
 app.use('/cookingRecipe',cookingRecipeRoutes)
 app.use('/user',userRoutes)
-
 module.exports = app
