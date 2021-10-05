@@ -4,13 +4,13 @@
         <form class="col-md-4">
             <h3>Connexion</h3>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label>Email</label>
                 <input v-model="email" type="email" class="form-control form-control-lg" />
                 <div class="errorMessage">{{ validation.firstError('email') }}</div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label>Mot de passe</label>
                 <input v-model="password" type="password" class="form-control form-control-lg" />
                 <div class="errorMessage">{{ validation.firstError('password') }}</div>
@@ -58,7 +58,7 @@ export default {
         .post('http://localhost:3000/user/login', postDataLogin)
         .then(response => {
           console.log('reponse put signup', response)
-          this.$router.push('/')
+          this.$router.push('/', true, 'toto')
         })
         .catch(error => {
           console.log('Erreur lors de l\'appel à /login', error.response.data)
