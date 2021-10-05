@@ -17,7 +17,7 @@
           <router-link class="nav-link" to="/login">Connexion</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="#">Inscription</router-link>
+          <router-link class="nav-link" to="/signup">Inscription</router-link>
         </li>
       </ul>
     </div>
