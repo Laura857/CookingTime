@@ -2,23 +2,22 @@
   <div class="cookingRecipe p-3">
     <h1>Toutes nos supers recettes</h1>
     <!-- <p>{{ cookingRecipe }}</p> -->
-    <b-container>
-      <div class="list-unstyled" v-for="cookingRecipe in cookingRecipes" :key="cookingRecipe._id">
-        <b-card>
-        <!-- Bootstrap Jumbotron -->
-        <b-jumbotron>
-          <!-- ligne -->
-          <b-row>
-            <b-col cols="8">
-              <h1>{{cookingRecipe.name}}</h1>
-              <p>{{cookingRecipe.ingredients}}</p>
-              <p>{{cookingRecipe.instruction}}</p>
-            </b-col>
-          </b-row>
-        </b-jumbotron>
-        </b-card>
+    <div class="container" id="app">
+      <div class="row">
+          <div v-for="cookingRecipe in cookingRecipes" v-bind:key="cookingRecipe._id" class="col-md-3 col-6 my-1">
+              <div class="card h-100">
+                  <img src="https://picsum.photos/600/300/?image=25" class="card-img-top">
+                  <div class="card-body" style="align-items: baseline;">
+                    <div class="card-title">
+                      {{ cookingRecipe.name }}
+                      <router-link class="nav-link" style="float: right;" to="#"><b-icon icon="pencil-fill"></b-icon></router-link>
+                      <router-link class="nav-link" style="float: right;" to="#"><b-icon icon="trash-fill"></b-icon></router-link>
+                    </div>
+                  </div>
+              </div>
+          </div>
       </div>
-    </b-container>
+    </div>
   </div>
 </template>
 
