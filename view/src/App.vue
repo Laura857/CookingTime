@@ -52,8 +52,8 @@ export default {
   name: 'App',
   data () {
     return {
-      isToken: true,
-      pseudo: 'Laura'
+      isToken: false,
+      pseudo: ''
     }
   }
 }

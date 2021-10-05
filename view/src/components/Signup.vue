@@ -21,7 +21,7 @@
               <input v-model="password" type="password" class="form-control form-control-lg" />
               <div class="errorMessage">{{ validation.firstError('password') }}</div>
           </div>
-            <button @click.prevent="signUpPost()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Inscription</button>
+          <button @click.prevent="signUpPost()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Inscription</button>
         </form>
       </div>
     </div>

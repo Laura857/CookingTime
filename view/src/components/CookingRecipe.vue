@@ -10,7 +10,7 @@
                   <div class="card-body" style="align-items: baseline;">
                     <div class="card-title">
                       {{ cookingRecipe.name }}
-                      <router-link class="nav-link" style="float: right;" to="#"><b-icon icon="pencil-fill"></b-icon></router-link>
+                      <router-link class="nav-link" style="float: right;" :to="`/updateCookingRecipe/${cookingRecipe._id}`"><b-icon icon="pencil-fill"></b-icon></router-link>
                       <router-link class="nav-link" style="float: right;" to="#"><b-icon icon="trash-fill"></b-icon></router-link>
                     </div>
                   </div>
