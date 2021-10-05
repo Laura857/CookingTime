@@ -35,12 +35,12 @@ exports.login = (req,res,next) => {
     User.findOne({email: req.body.email})
         .then(user=>{
             if(!user){
-                return res.status(401).json({error: 'pas trouvé'})
+                return res.status(401).json({error: 'Mail incorrect'})
             }
             bcrypt.compare(req.body.password, user.password)
                 .then(ok =>{
                     if(!ok){
-                        return res.status((401).json({error: 'incorect mdp'}))
+                        return res.status((401).json({error: 'Mot de passe incorrect'}))
                     }
                     res.status(200).json({
                         userId: user._id,

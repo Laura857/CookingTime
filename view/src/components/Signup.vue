@@ -21,7 +21,7 @@
               <input v-model="password" type="password" class="form-control form-control-lg" />
               <div class="errorMessage">{{ validation.firstError('password') }}</div>
           </div>
-            <button id="submitbutton" @click.prevent="signUpPost()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Inscription</button>
+            <button @click.prevent="signUpPost()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Inscription</button>
         </form>
       </div>
     </div>
@@ -39,8 +39,7 @@ export default {
       email: null,
       password: null,
       errorEmail: '',
-      errorPseudo: '',
-      message: ''
+      errorPseudo: ''
     }
   },
   validators: {
@@ -61,7 +60,6 @@ export default {
         .post('http://localhost:3000/user/signup', postDataSignup)
         .then(response => {
           console.log('reponse put signup', response)
-          this.message = response
           this.$router.push('/')
         })
         .catch(error => {
