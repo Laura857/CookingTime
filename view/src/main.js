@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
+import SimpleVueValidation from 'simple-vue-validator'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -11,7 +12,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
-
+Vue.use(SimpleVueValidation)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -4,11 +4,21 @@ const User = require('./../models/user')
 const jsontoken = require('jsonwebtoken')
 
 exports.signup = (req,res,next) =>{
-    console.log('begin sign')
-
+    console.log('Begin signup')
+    if (req.body.password.length < 6 ) {
+        return res.status(400).json({
+            error: {
+                errors: {
+                    password: {
+                        message: "Must have at least 6 characters."
+                    }
+                }
+                }
+            })
+    }
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
-            console.log('1')
+            console.log('Create user')
             const user = new User({
                 email:req.body.email,
                 password: hash,
