@@ -14,10 +14,10 @@
     <div class="float-right">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Connexion</a>
+          <router-link class="nav-link" to="/login">Connexion</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Inscription</a>
+          <router-link class="nav-link" to="#">Inscription</router-link>
         </li>
       </ul>
     </div>
