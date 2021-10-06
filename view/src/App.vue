@@ -36,8 +36,8 @@
                     <b-icon icon="person-fill"></b-icon>
                   </div>
                 </template>
-                <b-dropdown-item href="#">Modifier le profil</b-dropdown-item>
-                <b-dropdown-item  @click.prevent="logout()">Déconnexion</b-dropdown-item>
+                <b-dropdown-item><router-link class="nav-link" to="/updateUser">Modifier le profil</router-link></b-dropdown-item>
+                <b-dropdown-item  @click.prevent="logout()"><router-link class="nav-link" to="@">Déconnexion</router-link></b-dropdown-item>
               </b-nav-item-dropdown>
             </li>
           </ul>
