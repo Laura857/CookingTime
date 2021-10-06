@@ -25,7 +25,7 @@ export default new Router({
       component: Signup
     },
     {
-      path: '/updateCookingRecipe/:id',
+      path: '/cookingRecipe/:id',
       name: 'FormCookingRecipe',
       component: FormCookingRecipe
     }
