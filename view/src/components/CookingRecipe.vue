@@ -11,12 +11,12 @@
                     <div class="card-title">
                       {{ cookingRecipe.name }}
                       <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('update')" :to="`/cookingRecipe/${cookingRecipe._id}`"><b-icon icon="pencil-fill"></b-icon></router-link>
-                      <router-link class="nav-link" style="float: right;" to="#"><b-icon icon="trash-fill"></b-icon></router-link>
+                      <router-link class="nav-link" style="float: right;" to="#" @click.native="deleteCookingRecipe(cookingRecipe)"><b-icon icon="trash-fill"></b-icon></router-link>
                     </div>
                   </div>
               </div>
           </div>
-      </div>
+        </div>
       <div class="h2 mb-0">
         <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('create')" to="/cookingRecipe/create"><b-icon icon="plus-circle-fill"></b-icon></router-link>
       </div>
@@ -47,6 +47,22 @@ export default {
     setModeFormCookingRecipe (mode) {
       console.log('On met à jour le mode pour le formulaire cooking recipe avec : ', mode)
       localStorage.setItem('modeFormCookingRecipe', mode)
+    },
+    deleteCookingRecipe (cookingRecipe) {
+      this.boxOne = ''
+      this.$bvModal.msgBoxConfirm('Vous allez supprimer la recette ' + cookingRecipe.name)
+        .then(value => {
+          if (value === true) {
+            axios
+              .delete('http://localhost:3000/cookingRecipe/' + cookingRecipe._id)
+              .then(response => {
+                console.log('reponse delete /cookingRecipe', response)
+                window.location.reload()
+              })
+              .catch(error => console.log(error))
+          }
+        })
+        .catch(error => console.log('Une erreur est survenue lors du delete', error))
     }
   }
 }
