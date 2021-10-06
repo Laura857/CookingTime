@@ -60,7 +60,7 @@ export default {
   mounted () {
     console.log('Au chargement de la page : ', localStorage)
     if (localStorage.user) {
-      this.pseudo = localStorage.pseudo
+      this.pseudo = JSON.parse(localStorage.user).pseudo
       this.isToken = true
     }
   },

@@ -17,6 +17,9 @@
               </div>
           </div>
       </div>
+      <div class="h2 mb-0">
+        <router-link class="nav-link" style="float: right;" to="#"><b-icon icon="plus-circle-fill"></b-icon></router-link>
+      </div>
     </div>
   </div>
 </template>

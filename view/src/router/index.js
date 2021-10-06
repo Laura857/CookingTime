@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import CookingRecipe from '@/components/CookingRecipe'
 import Login from '@/components/Login.vue'
 import Signup from '@/components/Signup.vue'
-import UpdateCookingRecipe from '@/components/UpdateCookingRecipe.vue'
+import FormCookingRecipe from '@/components/FormCookingRecipe.vue'
 
 Vue.use(Router)
 
@@ -26,8 +26,8 @@ export default new Router({
     },
     {
       path: '/updateCookingRecipe/:id',
-      name: 'UpdateCookingRecipe',
-      component: UpdateCookingRecipe
+      name: 'FormCookingRecipe',
+      component: FormCookingRecipe
     }
   ]
 })

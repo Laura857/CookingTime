@@ -59,16 +59,6 @@ export default {
         .then(response => {
           console.log('reponse put signup', response)
           localStorage.setItem('user', JSON.stringify(response.data))
-          // Récupérer le pseudo
-          console.log('Appel get user')
-          const userId = response.data.userId
-          axios
-            .get(`http://localhost:3000/user/${userId}`)
-            .then(responseGet => {
-              console.log('reponse get user', responseGet)
-              localStorage.setItem('pseudo', response.data.pseudo)
-            })
-            .catch(error => console.log(error))
           console.log('Après la connexion on a stocké : ', localStorage)
           this.$router.push('/')
           window.location.reload()
