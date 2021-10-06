@@ -65,7 +65,6 @@ export default {
             const config = {
               headers: { Authorization: `Bearer ${this.token}` }
             }
-            console.log(config)
             axios
               .delete('http://localhost:3000/cookingRecipe/' + cookingRecipe._id, config)
               .then(response => {

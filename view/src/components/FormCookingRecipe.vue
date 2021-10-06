@@ -38,10 +38,15 @@ export default {
       mode: '',
       name: '',
       ingredients: '',
-      instruction: ''
+      instruction: '',
+      token: ''
     }
   },
   mounted () {
+    if (localStorage.user) {
+      this.isToken = true
+      this.token = JSON.parse(localStorage.user).token
+    }
     console.log('Form cooking recipe mode : ', localStorage.modeFormCookingRecipe)
     if (localStorage.modeFormCookingRecipe === 'update') {
       this.mode = localStorage.modeFormCookingRecipe
@@ -63,24 +68,30 @@ export default {
   methods: {
     updateCookingRecipe () {
       const id = this.$route.params.id
+      const config = {
+        headers: { Authorization: `Bearer ${this.token}` }
+      }
       const dataUpdate = {name: this.name, ingredients: this.ingredients, instruction: this.instruction}
       console.log('Appel put update cooking recipe avec : ', dataUpdate)
       axios
-        .put(`http://localhost:3000/cookingRecipe/${id}`, dataUpdate)
+        .put(`http://localhost:3000/cookingRecipe/${id}`, dataUpdate, config)
         .then(response => {
           console.log('reponse put cookingRecipe', response)
           localStorage.removeItem('modeFormCookingRecipe')
           this.$router.push('/')
         })
         .catch(error => {
-          console.log('Erreur lors de l\'appel à /cookingRecipe/', id, error.response.data)
+          console.log('Erreur lors de l\'appel à /cookingRecipe/' + id, error.response.data)
         })
     },
     createCookingRecipe () {
       const dataCreate = {name: this.name, ingredients: this.ingredients, instruction: this.instruction}
+      const config = {
+        headers: { Authorization: `Bearer ${this.token}` }
+      }
       console.log('Appel post create cooking recipe avec : ', dataCreate)
       axios
-        .post('http://localhost:3000/cookingRecipe/', dataCreate)
+        .post('http://localhost:3000/cookingRecipe/', dataCreate, config)
         .then(response => {
           console.log('reponse post create cooking recipe', response)
           localStorage.removeItem('modeFormCookingRecipe')
