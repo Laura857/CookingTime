@@ -60,3 +60,10 @@ exports.getUserId = (req,res,next)=>{
         .then(user=> res.status(200).json(user))
         .catch(error => res.status(404).json({error}))
 }
+
+exports.updateUserId =(req,res,next)=>{
+    console.log('put update user')
+    User.updateOne({_id: req.params.id},{...req.body, _id: req.params.id})
+        .then(()=> res.status(200).json({message: 'ok'}))
+        .catch(()=> res.status(400).json({ error}))
+}
