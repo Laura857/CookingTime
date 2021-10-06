@@ -40,7 +40,7 @@ export default {
   mounted () {
     if (localStorage.user) {
       this.isToken = true
-      this.token = localStorage.user.token
+      this.token = JSON.parse(localStorage.user).token
     }
     console.log('Appel get /cookingRecipe')
     axios
@@ -62,8 +62,12 @@ export default {
       this.$bvModal.msgBoxConfirm('Vous allez supprimer la recette ' + cookingRecipe.name)
         .then(value => {
           if (value === true) {
+            const config = {
+              headers: { Authorization: `Bearer ${this.token}` }
+            }
+            console.log(config)
             axios
-              .delete('http://localhost:3000/cookingRecipe/' + cookingRecipe._id)
+              .delete('http://localhost:3000/cookingRecipe/' + cookingRecipe._id, config)
               .then(response => {
                 console.log('reponse delete /cookingRecipe', response)
                 window.location.reload()
