@@ -27,17 +27,18 @@
         <div class="float-right">
           <ul class="navbar-nav mr-auto" style="align-items: baseline;">
             <li class="nav-item">
-              <div class="h3 mb-0">
-                <router-link class="nav-link" to="#"><b-icon icon="suit-heart-fill"></b-icon></router-link>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="h2 mb-0">
-                <router-link class="nav-link" to="#"><b-icon icon="person-fill"></b-icon></router-link>
-              </div>
-            </li>
-            <li class="nav-item">
               <p>Hello {{pseudo}} !</p>
+            </li>
+            <li class="nav-item dropdown">
+              <b-nav-item-dropdown text="Lang" right>
+                <template v-slot:button-content>
+                  <div class="h2 mb-0">
+                    <b-icon icon="person-fill"></b-icon>
+                  </div>
+                </template>
+                <b-dropdown-item href="#">Modifier le profil</b-dropdown-item>
+                <b-dropdown-item  @click.prevent="logout()">Déconnexion</b-dropdown-item>
+              </b-nav-item-dropdown>
             </li>
           </ul>
         </div>
@@ -55,6 +56,27 @@ export default {
       isToken: false,
       pseudo: ''
     }
+  },
+  mounted () {
+    console.log('Au chargement de la page : ', localStorage)
+    if (localStorage.user) {
+      this.pseudo = localStorage.pseudo
+      this.isToken = true
+    }
+  },
+  methods: {
+    logout () {
+      console.log('Déconnexion Au revoir')
+      localStorage.removeItem('pseudo')
+      localStorage.removeItem('user')
+      window.location.reload()
+    }
   }
 }
 </script>
+
+<style>
+  .dropdown-toggle::after {
+      content: none
+  }
+</style>

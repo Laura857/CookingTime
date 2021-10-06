@@ -38,13 +38,13 @@ exports.deleteCookingRecipeId =(req,res,next)=>{
 exports.getCookingRecipeId = (req,res,next)=>{
     console.log('get cooking recipe id')
     CookingRecipe.findOne({_id:req.params.id})
-        .then(post=> res.status(200).json(post))
+        .then(cookingRecipe=> res.status(200).json(cookingRecipe))
         .catch(error => res.status(404).json({error}))
 }
 
 exports.getAllCookingRecipe = (req,res,next)=> {
     console.log('get all cooking recipe')
     CookingRecipe.find()
-        .then(cooking => res.status(200).json(cooking))
+        .then(cookingRecipe => res.status(200).json(cookingRecipe))
         .catch(error=> res.status(400).json({error}));
 }

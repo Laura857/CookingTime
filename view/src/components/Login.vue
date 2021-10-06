@@ -58,7 +58,20 @@ export default {
         .post('http://localhost:3000/user/login', postDataLogin)
         .then(response => {
           console.log('reponse put signup', response)
-          this.$router.push('/', true, 'toto')
+          localStorage.setItem('user', JSON.stringify(response.data))
+          // Récupérer le pseudo
+          console.log('Appel get user')
+          const userId = response.data.userId
+          axios
+            .get(`http://localhost:3000/user/${userId}`)
+            .then(responseGet => {
+              console.log('reponse get user', responseGet)
+              localStorage.setItem('pseudo', response.data.pseudo)
+            })
+            .catch(error => console.log(error))
+          console.log('Après la connexion on a stocké : ', localStorage)
+          this.$router.push('/')
+          window.location.reload()
         })
         .catch(error => {
           console.log('Erreur lors de l\'appel à /login', error.response.data)
