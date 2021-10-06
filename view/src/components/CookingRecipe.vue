@@ -10,15 +10,17 @@
                   <div class="card-body" style="align-items: baseline;">
                     <div class="card-title">
                       {{ cookingRecipe.name }}
-                      <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('update')" :to="`/cookingRecipe/${cookingRecipe._id}`"><b-icon icon="pencil-fill"></b-icon></router-link>
-                      <router-link class="nav-link" style="float: right;" to="#" @click.native="deleteCookingRecipe(cookingRecipe)"><b-icon icon="trash-fill"></b-icon></router-link>
+                      <div v-if="isToken === true">
+                        <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('update', cookingRecipe._id)" to="#"><b-icon icon="pencil-fill"></b-icon></router-link>
+                        <router-link class="nav-link" style="float: right;" to="#" @click.native="deleteCookingRecipe(cookingRecipe)"><b-icon icon="trash-fill"></b-icon></router-link>
+                      </div>
                     </div>
                   </div>
               </div>
           </div>
         </div>
-      <div class="h2 mb-0">
-        <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('create')" to="/cookingRecipe/create"><b-icon icon="plus-circle-fill"></b-icon></router-link>
+      <div v-if="isToken === true" class="h2 mb-0">
+        <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('create', 'create')" to="#"><b-icon icon="plus-circle-fill"></b-icon></router-link>
       </div>
     </div>
   </div>
@@ -30,10 +32,16 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      cookingRecipes: []
+      cookingRecipes: [],
+      isToken: false,
+      token: ''
     }
   },
   mounted () {
+    if (localStorage.user) {
+      this.isToken = true
+      this.token = localStorage.user.token
+    }
     console.log('Appel get /cookingRecipe')
     axios
       .get('http://localhost:3000/cookingRecipe')
@@ -44,9 +52,10 @@ export default {
       .catch(error => console.log(error))
   },
   methods: {
-    setModeFormCookingRecipe (mode) {
+    setModeFormCookingRecipe (mode, id) {
       console.log('On met à jour le mode pour le formulaire cooking recipe avec : ', mode)
       localStorage.setItem('modeFormCookingRecipe', mode)
+      this.$router.push('/cookingRecipe/' + id)
     },
     deleteCookingRecipe (cookingRecipe) {
       this.boxOne = ''

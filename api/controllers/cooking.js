@@ -15,7 +15,6 @@ exports.createCookingRecipe = (req,res,next)=>{
 
 exports.updateCookingRecipeId =(req,res,next)=>{
     console.log('put update cooking recipe')
-    const postObject = { ...req.body}; 
     CookingRecipe.updateOne({_id: req.params.id},{...req.body, _id: req.params.id})
         .then(()=> res.status(200).json({message: 'ok'}))
         .catch(()=> res.status(400).json({ error}))
