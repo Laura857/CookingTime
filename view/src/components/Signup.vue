@@ -10,10 +10,10 @@
           </div>
 
           <div class="form-group mt-2">
-              <label>Email</label>
-              <p class="errorMessage">{{errorEmail}}</p>
-              <input v-model="email" type="email" class="form-control form-control-lg" />
-              <div class="errorMessage">{{ validation.firstError('email') }}</div>
+            <label>Email</label>
+            <p class="errorMessage">{{errorEmail}}</p>
+            <input v-model="email" type="email" class="form-control form-control-lg" />
+            <div class="errorMessage">{{ validation.firstError('email') }}</div>
           </div>
 
           <div class="form-group mt-2">
@@ -21,6 +21,7 @@
               <input v-model="password" type="password" class="form-control form-control-lg" />
               <div class="errorMessage">{{ validation.firstError('password') }}</div>
           </div>
+          <p class="errorMessage">{{error}}</p>
           <button @click.prevent="signUpPost()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Inscription</button>
         </form>
       </div>
@@ -39,7 +40,8 @@ export default {
       email: null,
       password: null,
       errorEmail: '',
-      errorPseudo: ''
+      errorPseudo: '',
+      error: ''
     }
   },
   validators: {
@@ -60,7 +62,25 @@ export default {
         .post('http://localhost:3000/user/signup', postDataSignup)
         .then(response => {
           console.log('reponse put signup', response)
-          this.$router.push('/')
+          // LOGIN
+          const postDataLogin = {email: this.email, password: this.password}
+          axios
+            .post('http://localhost:3000/user/login', postDataLogin)
+            .then(response => {
+              console.log('reponse put signup', response)
+              localStorage.setItem('user', JSON.stringify(response.data))
+              console.log('Après la connexion on a stocké : ', localStorage)
+              this.$router.push('/')
+              window.location.reload()
+            })
+            .catch(error => {
+              console.log('Erreur lors de l\'appel à /login', error.response.data)
+              if (error.response.data.error != null) {
+                this.error = error.response.data.error
+              } else {
+                this.error = ''
+              }
+            })
         })
         .catch(error => {
           console.log('Erreur lors de l\'appel à /signup', error.response.data)
