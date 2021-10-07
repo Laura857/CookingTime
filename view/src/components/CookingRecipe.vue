@@ -29,7 +29,7 @@
 <script>
 import axios from 'axios'
 import io from 'socket.io-client'
-let notification =""
+let notification = ''
 export default {
   data () {
     return {
@@ -40,7 +40,6 @@ export default {
     }
   },
   mounted () {
-    // this.socket.emit('notification', 'Hello there from Vue.')
     if (localStorage.user) {
       this.isToken = true
       this.token = JSON.parse(localStorage.user).token
@@ -55,6 +54,7 @@ export default {
       .catch(error => console.log(error))
     this.socket.on('broadcast', (data) => {
       notification = data
+      this.socket.close() 
       document.getElementById('notification').click()
     })
   },
