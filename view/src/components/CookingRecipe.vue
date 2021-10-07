@@ -1,7 +1,7 @@
 <template>
   <div class="cookingRecipe p-3">
     <h1>Toutes nos supers recettes</h1>
-    <button class="action-button" @click="showToast">Show toast</button>
+    <button id="notification" class="d-lg-none" @click="showToast">Show toast</button>
     <div class="container" id="app">
       <div class="row">
           <div v-for="cookingRecipe in cookingRecipes" v-bind:key="cookingRecipe._id" class="col-md-3 col-6 my-1">
@@ -57,6 +57,7 @@ export default {
     this.socket.on('broadcast', (data) => {
       console.log(data)
       this.notif = data
+      document.getElementById('notification').click()
     })
   },
   methods: {
