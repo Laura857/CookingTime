@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
     })
     socket.on('notification', (msg) => {
         console.log('notification: ' + msg)
-        io.emit('broadcast', `server: ${msg}`)
+        io.emit('broadcast', `${msg}`)
     })
 })
 

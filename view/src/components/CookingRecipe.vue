@@ -1,7 +1,7 @@
 <template>
   <div class="cookingRecipe p-3">
     <h1>Toutes nos supers recettes</h1>
-    <button id="notification" class="d-lg-none" @click="showToast">Show toast</button>
+    <button id="notification" class="d-lg-none" @click="showToast()">Show toast</button>
     <div class="container" id="app">
       <div class="row">
           <div v-for="cookingRecipe in cookingRecipes" v-bind:key="cookingRecipe._id" class="col-md-3 col-6 my-1">
@@ -29,19 +29,18 @@
 <script>
 import axios from 'axios'
 import io from 'socket.io-client'
-
+let notification =""
 export default {
   data () {
     return {
       cookingRecipes: [],
       isToken: false,
       token: '',
-      notif: '',
       socket: io('http://localhost:3001')
     }
   },
   mounted () {
-    this.socket.emit('notification', 'Hello there from VueCOOKING.')
+    // this.socket.emit('notification', 'Hello there from Vue.')
     if (localStorage.user) {
       this.isToken = true
       this.token = JSON.parse(localStorage.user).token
@@ -55,8 +54,7 @@ export default {
       })
       .catch(error => console.log(error))
     this.socket.on('broadcast', (data) => {
-      console.log(data)
-      this.notif = data
+      notification = data
       document.getElementById('notification').click()
     })
   },
@@ -89,7 +87,7 @@ export default {
         .catch(error => console.log('Une erreur est survenue lors du delete', error))
     },
     showToast () {
-      this.$toast.success('Notification: ' + this.notif, {
+      this.$toast.success(` ${notification}`, {
         position: 'top-right',
         timeout: 5000,
         closeOnClick: true,

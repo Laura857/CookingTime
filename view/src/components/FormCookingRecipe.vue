@@ -26,6 +26,7 @@
 
 <script>
 import axios from 'axios'
+import io from 'socket.io-client'
 
 export default {
   beforeDestroy () {
@@ -39,7 +40,8 @@ export default {
       name: '',
       ingredients: '',
       instruction: '',
-      token: ''
+      token: '',
+      socket: io('http://localhost:3001')
     }
   },
   mounted () {
@@ -78,6 +80,7 @@ export default {
         .then(response => {
           console.log('reponse put cookingRecipe', response)
           localStorage.removeItem('modeFormCookingRecipe')
+          this.socket.emit('notification', `La recette \"${this.name}\" a été modifiée 🤗`)
           this.$router.push('/')
         })
         .catch(error => {
@@ -95,6 +98,7 @@ export default {
         .then(response => {
           console.log('reponse post create cooking recipe', response)
           localStorage.removeItem('modeFormCookingRecipe')
+          this.socket.emit('notification', `Une nouvelle recette \"${this.name}\" a été ajoutée 🥰`)
           this.$router.push('/')
         })
         .catch(error => {
