@@ -28,16 +28,19 @@
 
 <script>
 import axios from 'axios'
+import io from 'socket.io-client'
 
 export default {
   data () {
     return {
       cookingRecipes: [],
       isToken: false,
-      token: ''
+      token: '',
+      socket: io('http://localhost:3001')
     }
   },
   mounted () {
+    this.socket.emit('notification', 'Hello there from Vue.')
     if (localStorage.user) {
       this.isToken = true
       this.token = JSON.parse(localStorage.user).token
@@ -50,8 +53,14 @@ export default {
         this.cookingRecipes = response.data
       })
       .catch(error => console.log(error))
+    this.socket.on('broadcast', (data) => {
+      console.log(data)
+    })
   },
   methods: {
+    sendMessage (e) {
+      e.preventDefault()
+    },
     setModeFormCookingRecipe (mode, id) {
       console.log('On met à jour le mode pour le formulaire cooking recipe avec : ', mode)
       localStorage.setItem('modeFormCookingRecipe', mode)
@@ -80,7 +89,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
   font-weight: normal;
