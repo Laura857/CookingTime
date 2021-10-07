@@ -54,7 +54,8 @@ export default {
   data () {
     return {
       isToken: false,
-      pseudo: ''
+      pseudo: '',
+      notif: ''
     }
   },
   mounted () {

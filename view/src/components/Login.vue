@@ -68,7 +68,7 @@ export default {
           if (error.response.data.error != null) {
             this.error = error.response.data.error
           } else {
-            this.error = ''
+            this.error = 'Mot de passe incoo'
           }
         })
     }

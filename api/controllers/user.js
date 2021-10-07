@@ -50,7 +50,7 @@ exports.login = (req,res,next) => {
                         pseudo: user.pseudo
                     })
                 })
-                .catch(error=> res.status(500).json({error}))
+                .catch(error=> res.status(500).json({error: 'Mot de passe incorrect'}))
         })
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="cookingRecipe p-3">
     <h1>Toutes nos supers recettes</h1>
-    <!-- <p>{{ cookingRecipe }}</p> -->
+    <button class="action-button" @click="showToast">Show toast</button>
     <div class="container" id="app">
       <div class="row">
           <div v-for="cookingRecipe in cookingRecipes" v-bind:key="cookingRecipe._id" class="col-md-3 col-6 my-1">
@@ -36,11 +36,12 @@ export default {
       cookingRecipes: [],
       isToken: false,
       token: '',
+      notif: '',
       socket: io('http://localhost:3001')
     }
   },
   mounted () {
-    this.socket.emit('notification', 'Hello there from Vue.')
+    this.socket.emit('notification', 'Hello there from VueCOOKING.')
     if (localStorage.user) {
       this.isToken = true
       this.token = JSON.parse(localStorage.user).token
@@ -55,6 +56,7 @@ export default {
       .catch(error => console.log(error))
     this.socket.on('broadcast', (data) => {
       console.log(data)
+      this.notif = data
     })
   },
   methods: {
@@ -84,6 +86,22 @@ export default {
           }
         })
         .catch(error => console.log('Une erreur est survenue lors du delete', error))
+    },
+    showToast () {
+      this.$toast.success('Notification: ' + this.notif, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
     }
   }
 }
