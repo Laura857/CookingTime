@@ -1,6 +1,11 @@
 <template>
   <div class="cookingRecipe p-3">
-    <h1>Toutes nos supers recettes</h1>
+    <div class="flex space-between ml-3">
+      <h1>Toutes nos supers recettes</h1>
+      <div v-if="isToken === true" class="h2 mb-0 flex">
+        <router-link class="nav-link" v-on:click.native="setModeFormCookingRecipe('create', 'create')" to="#"><b-icon icon="plus-circle-fill"></b-icon></router-link>
+      </div>
+    </div>
     <button id="notification" class="d-lg-none" @click="showToast()">Show toast</button>
     <div class="container" id="app">
       <div class="row">
@@ -19,9 +24,6 @@
               </div>
           </div>
         </div>
-      <div v-if="isToken === true" class="h2 mb-0">
-        <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('create', 'create')" to="#"><b-icon icon="plus-circle-fill"></b-icon></router-link>
-      </div>
     </div>
   </div>
 </template>
