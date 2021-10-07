@@ -4,7 +4,6 @@ import CookingRecipe from '@/components/CookingRecipe'
 import Login from '@/components/Login.vue'
 import Signup from '@/components/Signup.vue'
 import FormCookingRecipe from '@/components/FormCookingRecipe.vue'
-import UpdateUser from '@/components/UpdateUser.vue'
 
 Vue.use(Router)
 
@@ -29,11 +28,6 @@ export default new Router({
       path: '/cookingRecipe/:id',
       name: 'FormCookingRecipe',
       component: FormCookingRecipe
-    },
-    {
-      path: '/updateUser',
-      name: 'UpdateUser',
-      component: UpdateUser
     }
   ]
 })

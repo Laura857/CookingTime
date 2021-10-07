@@ -47,8 +47,7 @@ exports.login = (req,res,next) => {
                         token: jsontoken.sign(
                             {userId: user._id},'jesuissecret',{ expiresIn:'48h'}
                         ),
-                        pseudo: user.pseudo,
-                        email: user.email
+                        pseudo: user.pseudo
                     })
                 })
                 .catch(error=> res.status(500).json({error}))

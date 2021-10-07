@@ -51,7 +51,7 @@ export default {
     if (localStorage.modeFormCookingRecipe === 'update') {
       this.mode = localStorage.modeFormCookingRecipe
       const id = this.$route.params.id
-      console.log('Appel get /cookingRecipe/' + id)
+      console.log('Appel get /cookingRecipe/', id)
       axios
         .get(`http://localhost:3000/cookingRecipe/${id}`)
         .then(response => {

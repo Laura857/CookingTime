@@ -8,11 +8,11 @@
               <div class="card h-100">
                   <img src="https://picsum.photos/600/300/?image=25" class="card-img-top">
                   <div class="card-body" style="align-items: baseline;">
-                    <div class="card-title">
-                      {{ cookingRecipe.name }}
-                      <div v-if="isToken === true">
-                        <router-link class="nav-link" style="float: right;" v-on:click.native="setModeFormCookingRecipe('update', cookingRecipe._id)" to="#"><b-icon icon="pencil-fill"></b-icon></router-link>
-                        <router-link class="nav-link" style="float: right;" to="#" @click.native="deleteCookingRecipe(cookingRecipe)"><b-icon icon="trash-fill"></b-icon></router-link>
+                    <div class="card-title flex space-between">
+                      <h5>{{ cookingRecipe.name }}</h5>
+                      <div class="flex" v-if="isToken === true">
+                        <router-link class="nav-link" v-on:click.native="setModeFormCookingRecipe('update', cookingRecipe._id)" to="#"><b-icon icon="pencil-fill"></b-icon></router-link>
+                        <router-link class="nav-link" to="#" @click.native="deleteCookingRecipe(cookingRecipe)"><b-icon icon="trash-fill"></b-icon></router-link>
                       </div>
                     </div>
                   </div>
@@ -96,4 +96,11 @@ li {
 a {
   color: #42b983;
 }
+.flex{
+  display: flex;
+}
+.space-between{
+  justify-content: space-between;
+}
+
 </style>
