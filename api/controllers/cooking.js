@@ -38,7 +38,7 @@ exports.getCookingRecipeId = (req,res,next)=>{
     console.log('get cooking recipe id')
     CookingRecipe.findOne({_id:req.params.id})
         .then(cookingRecipe=> res.status(200).json(cookingRecipe))
-        .catch(error => res.status(404).json({error}))
+        .catch(error => res.status(404).json({error}));
 }
 
 exports.getAllCookingRecipe = (req,res,next)=> {

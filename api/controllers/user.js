@@ -63,7 +63,20 @@ exports.getUserId = (req,res,next)=>{
 
 exports.updateUserId =(req,res,next)=>{
     console.log('put update user')
-    User.updateOne({_id: req.params.id},{...req.body, _id: req.params.id})
-        .then(()=> res.status(200).json({message: 'ok'}))
-        .catch(()=> res.status(400).json({ error}))
+    // User.findOneAndUpdate({username: req.params.username}, { $set: req.body }, { new: true }, callback);
+    if(req.body.password) {
+        bcrypt.hash(req.body.password, 10)
+        .then(hash => {
+            req.body.password = hash
+            User.updateOne({_id: req.params.id},{ $set: {...req.body, _id: req.params.id}})
+                .then(()=> res.status(200).json({message: 'Utilisateur mis à jour'}))
+                .catch( error => res.status(400).json({ error}))
+        })
+        .catch(error=> res.status(500).json({error}))
+    } else {
+        User.updateOne({_id: req.params.id},{ $set: {...req.body, _id: req.params.id}})
+        .then(()=> res.status(200).json({message: 'Utilisateur mis à jour'}))
+        .catch(error => res.status(400).json({ error}))
+    }
+   
 }
