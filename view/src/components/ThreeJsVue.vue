@@ -4,32 +4,46 @@
 
 <script>
 import * as THREE from 'three'
+import GLTFLoader from 'three-gltf-loader'
+
+// eslint-disable-next-line
+/* eslint-disable */ 
 export default {
+    data () {
+      return {
+        publicPath: process.env.BASE_URL
+      }
+    },
   mounted () {
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    var scene, camera, renderer, hlight;
 
-    const renderer = new THREE.WebGLRenderer()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    document.getElementById('threejs').appendChild(renderer.domElement)
+init();
 
-    const geometry = new THREE.BoxGeometry()
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-    const cube = new THREE.Mesh(geometry, material)
-    scene.add(cube)
+function init() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+  camera.position.z = 500;
+  hlight = new THREE.AmbientLight(0xffffff, 1);
+  scene.add(hlight);
 
-    camera.position.z = 5
+  renderer = new THREE.WebGLRenderer({
+    antialias: true
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-    const animate = function () {
-      requestAnimationFrame(animate)
+  var loader = new GLTFLoader();
+  loader.load('https://threejs.org/examples/models/gltf/Horse.glb', function(gltf) {
+      scene.add(gltf.scene);
+      renderer.render(scene, camera);
+    },
+    undefined,
+    function(error) {
+      console.error(error);
+    });
+}
 
-      cube.rotation.x += 0.01
-      cube.rotation.y += 0.01
 
-      renderer.render(scene, camera)
-    }
-
-    animate()
   }
 }
 </script>
