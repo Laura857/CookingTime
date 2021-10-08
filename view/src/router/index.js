@@ -4,7 +4,7 @@ import CookingRecipe from '@/components/CookingRecipe'
 import Login from '@/components/Login.vue'
 import Signup from '@/components/Signup.vue'
 import FormCookingRecipe from '@/components/FormCookingRecipe.vue'
-// import Socket from '@/components/Socket.vue'
+import ThreeJsVue from '@/components/ThreeJsVue.vue'
 
 Vue.use(Router)
 
@@ -15,11 +15,11 @@ export default new Router({
       name: 'CookingRecipe',
       component: CookingRecipe
     },
-    // {
-    //   path: '/',
-    //   name: 'Socket',
-    //   component: Socket
-    // },
+    {
+      path: '/threeJsVue',
+      name: 'ThreeJsVue',
+      component: ThreeJsVue
+    },
     {
       path: '/login',
       name: 'Login',

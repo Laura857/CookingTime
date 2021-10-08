@@ -31,6 +31,7 @@
 <script>
 import axios from 'axios'
 import io from 'socket.io-client'
+
 let notification = ''
 export default {
   data () {
@@ -56,7 +57,7 @@ export default {
       .catch(error => console.log(error))
     this.socket.on('broadcast', (data) => {
       notification = data
-      this.socket.close() 
+      this.socket.close()
       document.getElementById('notification').click()
     })
   },
