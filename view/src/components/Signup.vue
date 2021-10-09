@@ -81,7 +81,7 @@ export default {
               if (error.response.data.error != null) {
                 this.error = error.response.data.error
               } else {
-                this.error = ''
+                this.error = 'Erreur lors de la connexion'
               }
             })
         })

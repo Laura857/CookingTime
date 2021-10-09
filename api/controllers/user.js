@@ -66,6 +66,17 @@ exports.updateUserId =(req,res,next)=>{
     console.log('put update user')
     // User.findOneAndUpdate({username: req.params.username}, { $set: req.body }, { new: true }, callback);
     if(req.body.password) {
+        if (req.body.password.length < 6 ) {
+            return res.status(400).json({
+                error: {
+                    errors: {
+                        password: {
+                            message: "Must have at least 6 characters."
+                        }
+                    }
+                    }
+                })
+        }
         bcrypt.hash(req.body.password, 10)
         .then(hash => {
             req.body.password = hash

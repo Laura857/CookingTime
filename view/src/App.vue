@@ -42,7 +42,8 @@
                   </div>
                 </template>
                 <b-dropdown-item><router-link class="nav-link" :to="`/updateUser/${userId}`">Modifier le profil</router-link></b-dropdown-item>
-                 <b-dropdown-item  @click.prevent="logout()"><router-link class="nav-link" to="/">Déconnexion</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link class="nav-link" :to="`/updatePassword/${userId}`">Modifier le mot de passe</router-link></b-dropdown-item>
+                <b-dropdown-item  @click.prevent="logout()"><router-link class="nav-link" to="/">Déconnexion</router-link></b-dropdown-item>
               </b-nav-item-dropdown>
             </li>
           </ul>

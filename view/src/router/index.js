@@ -6,6 +6,7 @@ import Signup from '@/components/Signup.vue'
 import FormCookingRecipe from '@/components/FormCookingRecipe.vue'
 import ThreeJsVue from '@/components/ThreeJsVue.vue'
 import UpdateUser from '@/components/UpdateUser.vue'
+import UpdatePassword from '@/components/UpdatePassword.vue'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/updateUser/:id',
       name: 'UpdateUser',
       component: UpdateUser
+    },
+    {
+      path: '/updatePassword/:id',
+      name: 'UpdatePassword',
+      component: UpdatePassword
     }
   ]
 })

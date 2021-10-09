@@ -70,7 +70,7 @@ export default {
         })
         .catch(error => {
           console.log('Erreur lors de la mise à jour du profil ', error.response.data)
-          this.error = 'Erreur lors de la mise à jour'
+          this.error = 'Erreur lors de la mise à jour du profil'
         })
     }
   }
