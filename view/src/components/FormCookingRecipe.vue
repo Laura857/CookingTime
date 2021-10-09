@@ -45,15 +45,15 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.user) {
+    if (localStorage.token) {
       this.isToken = true
-      this.token = JSON.parse(localStorage.user).token
+      this.token = localStorage.token
     }
     console.log('Form cooking recipe mode : ', localStorage.modeFormCookingRecipe)
     if (localStorage.modeFormCookingRecipe === 'update') {
       this.mode = localStorage.modeFormCookingRecipe
       const id = this.$route.params.id
-      console.log('Appel get /cookingRecipe/', id)
+      console.log('Appel get /cookingRecipe/' + id)
       axios
         .get(`http://localhost:3000/cookingRecipe/${id}`)
         .then(response => {

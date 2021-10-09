@@ -41,8 +41,8 @@
                     <b-icon icon="person-fill"></b-icon>
                   </div>
                 </template>
-                <b-dropdown-item href="#">Modifier le profil</b-dropdown-item>
-                <b-dropdown-item  @click.prevent="logout()">Déconnexion</b-dropdown-item>
+                <b-dropdown-item><router-link class="nav-link" :to="`/updateUser/${userId}`">Modifier le profil</router-link></b-dropdown-item>
+                 <b-dropdown-item  @click.prevent="logout()"><router-link class="nav-link" to="/">Déconnexion</router-link></b-dropdown-item>
               </b-nav-item-dropdown>
             </li>
           </ul>
@@ -58,6 +58,7 @@ export default {
   name: 'App',
   data () {
     return {
+      userId: '',
       isToken: false,
       pseudo: '',
       notif: ''
@@ -65,8 +66,9 @@ export default {
   },
   mounted () {
     console.log('Au chargement de la page : ', localStorage)
-    if (localStorage.user) {
-      this.pseudo = JSON.parse(localStorage.user).pseudo
+    if (localStorage.token) {
+      this.pseudo = localStorage.pseudo
+      this.userId = localStorage.userId
       this.isToken = true
     }
   },
@@ -74,7 +76,9 @@ export default {
     logout () {
       console.log('Déconnexion Au revoir')
       localStorage.removeItem('pseudo')
-      localStorage.removeItem('user')
+      localStorage.removeItem('email')
+      localStorage.removeItem('userId')
+      localStorage.removeItem('token')
       window.location.reload()
     }
   }

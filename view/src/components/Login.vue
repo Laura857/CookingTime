@@ -58,7 +58,10 @@ export default {
         .post('http://localhost:3000/user/login', postDataLogin)
         .then(response => {
           console.log('reponse put signup', response)
-          localStorage.setItem('user', JSON.stringify(response.data))
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('pseudo', response.data.pseudo)
+          localStorage.setItem('userId', response.data.userId)
+          localStorage.setItem('email', response.data.email)
           console.log('Après la connexion on a stocké : ', localStorage)
           this.$router.push('/')
           window.location.reload()

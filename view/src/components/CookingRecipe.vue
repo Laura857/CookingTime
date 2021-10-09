@@ -43,9 +43,9 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.user) {
+    if (localStorage.token) {
       this.isToken = true
-      this.token = JSON.parse(localStorage.user).token
+      this.token = localStorage.token
     }
     console.log('Appel get /cookingRecipe')
     axios
