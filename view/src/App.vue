@@ -6,11 +6,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="float-center">
+          <input v-model="searchField" class="mr-auto" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit" @click.prevent="search()">Recherche</button>
+        </form>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <router-link class="nav-link" to="/threeJsVue">3D</router-link>
-            </li>
-          </ul>
+          <li class="nav-item active">
+            <router-link class="nav-link" to="/threeJsVue">3D</router-link>
+          </li>
+        </ul>
       </div>
       <div v-if="isToken === false">
         <div class="float-right">
@@ -58,7 +62,8 @@ export default {
       userId: '',
       isToken: false,
       pseudo: '',
-      notif: ''
+      notif: '',
+      searchField: ''
     }
   },
   mounted () {
@@ -77,6 +82,12 @@ export default {
       localStorage.removeItem('userId')
       localStorage.removeItem('token')
       window.location.reload()
+    },
+    search () {
+      if (this.searchField) {
+        this.$router.push(`/${this.searchField}`)
+        window.location.reload()
+      }
     }
   }
 }

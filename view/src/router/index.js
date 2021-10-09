@@ -18,6 +18,11 @@ export default new Router({
       component: CookingRecipe
     },
     {
+      path: '/:name',
+      name: 'CookingRecipe',
+      component: CookingRecipe
+    },
+    {
       path: '/threeJsVue',
       name: 'ThreeJsVue',
       component: ThreeJsVue

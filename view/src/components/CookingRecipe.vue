@@ -2,10 +2,6 @@
   <div class="cookingRecipe p-3">
     <div class="flex space-between ml-3">
       <h1>Toutes nos supers recettes</h1>
-      <form class="float-center">
-        <input v-model="searchField" class="mr-auto" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit" @click.prevent="search()">Recherche</button>
-      </form>
       <div v-if="isToken === true" class="h2 mb-0 flex">
         <router-link class="nav-link" v-on:click.native="setModeFormCookingRecipe('create', 'create')" to="#"><b-icon icon="plus-circle-fill"></b-icon></router-link>
       </div>
@@ -52,14 +48,26 @@ export default {
       this.isToken = true
       this.token = localStorage.token
     }
-    console.log('Appel get /cookingRecipe')
-    axios
-      .get('http://localhost:3000/cookingRecipe')
-      .then(response => {
-        console.log('Réponse de la recherche de toutes les recettes', response)
-        this.cookingRecipes = response.data
-      })
-      .catch(error => console.log(error))
+    if (this.$route.params.name) {
+      const dataSearch = {name: this.$route.params.name}
+      console.log('Appel /search : ', dataSearch)
+      axios
+        .post('http://localhost:3000/cookingRecipe/search', dataSearch)
+        .then(response => {
+          console.log('Réponse get /search', response.data)
+          this.cookingRecipes = response.data
+        })
+        .catch(error => console.log(error))
+    } else {
+      console.log('Appel get /cookingRecipe')
+      axios
+        .get('http://localhost:3000/cookingRecipe')
+        .then(response => {
+          console.log('Réponse de la recherche de toutes les recettes', response)
+          this.cookingRecipes = response.data
+        })
+        .catch(error => console.log(error))
+    }
     this.socket.on('broadcast', (data) => {
       notification = data
       this.socket.close()
@@ -109,19 +117,6 @@ export default {
         icon: true,
         rtl: false
       })
-    },
-    search () {
-      if (this.searchField) {
-        const dataSearch = {name: this.searchField}
-        console.log('Appel /search : ', dataSearch)
-        axios
-          .post('http://localhost:3000/cookingRecipe/search', dataSearch)
-          .then(response => {
-            console.log('Réponse get /search', response.data)
-            this.cookingRecipes = response.data
-          })
-          .catch(error => console.log(error))
-      }
     }
   }
 }
