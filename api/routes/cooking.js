@@ -5,6 +5,7 @@ const auth = require('../middleware/auth')
 
 router.post('/',  auth, cookingController.createCookingRecipe)
 router.put('/:id',  auth, cookingController.updateCookingRecipeId)
+router.post('/search', cookingController.getCookingRecipeLikeName)
 router.delete('/:id', auth, cookingController.deleteCookingRecipeId)
 router.get('/:id', cookingController.getCookingRecipeId)
 router.get('/', cookingController.getAllCookingRecipe)

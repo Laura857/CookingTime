@@ -42,3 +42,10 @@ exports.getAllCookingRecipe = (req,res,next)=> {
         .then(cookingRecipe => res.status(200).json(cookingRecipe))
         .catch(error=> res.status(400).json({error}))
 }
+
+exports.getCookingRecipeLikeName = (req,res,next)=> {
+    console.log("Recherche de type LIKE des recettes avec ", req.body.name)
+    CookingRecipe.find({ name: { '$regex' : req.body.name, '$options' : 'i' }})
+        .then(cookingRecipe => res.status(200).json(cookingRecipe))
+        .catch(error=> res.status(400).json({error}))
+}

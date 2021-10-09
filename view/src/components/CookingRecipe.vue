@@ -2,6 +2,10 @@
   <div class="cookingRecipe p-3">
     <div class="flex space-between ml-3">
       <h1>Toutes nos supers recettes</h1>
+      <form class="float-center">
+        <input v-model="searchField" class="mr-auto" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit" @click.prevent="search()">Recherche</button>
+      </form>
       <div v-if="isToken === true" class="h2 mb-0 flex">
         <router-link class="nav-link" v-on:click.native="setModeFormCookingRecipe('create', 'create')" to="#"><b-icon icon="plus-circle-fill"></b-icon></router-link>
       </div>
@@ -39,7 +43,8 @@ export default {
       cookingRecipes: [],
       isToken: false,
       token: '',
-      socket: io('http://localhost:3001')
+      socket: io('http://localhost:3001'),
+      searchField: ''
     }
   },
   mounted () {
@@ -104,6 +109,19 @@ export default {
         icon: true,
         rtl: false
       })
+    },
+    search () {
+      if (this.searchField) {
+        const dataSearch = {name: this.searchField}
+        console.log('Appel /search : ', dataSearch)
+        axios
+          .post('http://localhost:3000/cookingRecipe/search', dataSearch)
+          .then(response => {
+            console.log('Réponse get /search', response.data)
+            this.cookingRecipes = response.data
+          })
+          .catch(error => console.log(error))
+      }
     }
   }
 }
