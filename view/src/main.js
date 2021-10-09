@@ -7,7 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
+import VueProgressiveImage from 'vue-progressive-image'
 
+Vue.use(VueProgressiveImage)
 Vue.use(Toast, {
   transition: 'Vue-Toastification__bounce',
   maxToasts: 20,

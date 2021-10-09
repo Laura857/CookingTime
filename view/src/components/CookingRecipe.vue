@@ -10,19 +10,19 @@
     <div class="container" id="app">
       <div class="row">
           <div v-for="cookingRecipe in cookingRecipes" v-bind:key="cookingRecipe._id" class="col-md-3 col-6 my-1">
-              <div class="card h-100">
-                  <img v-if="cookingRecipe.urlImage" :src="cookingRecipe.urlImage" class="card-img-top">
-                  <img v-else src="https://assets.afcdn.com/recipe/20200206/107152_w1024h1024c1cx176cy267.webp" class="card-img-top">
-                  <div class="card-body" style="align-items: baseline;">
-                    <div class="card-title flex space-between">
-                      <h5>{{ cookingRecipe.name }}</h5>
-                      <div class="flex" v-if="isToken === true">
-                        <router-link class="nav-link" v-on:click.native="setModeFormCookingRecipe('update', cookingRecipe._id)" to="#"><b-icon icon="pencil-fill"></b-icon></router-link>
-                        <router-link class="nav-link" to="#" @click.native="deleteCookingRecipe(cookingRecipe)"><b-icon icon="trash-fill"></b-icon></router-link>
-                      </div>
-                    </div>
+            <div class="card h-100">
+              <img v-if="cookingRecipe.urlImage" class="card-img-top" :src="cookingRecipe.urlImage" @error="replaceByDefaultImage">
+              <img v-else id="imgCard" class="card-img-top" src="http://www.ipsgroup.fr/wp-content/uploads/2013/12/default_image_01.png">
+              <div class="card-body" style="align-items: baseline;">
+                <div class="card-title flex space-between">
+                  <h5>{{ cookingRecipe.name }}</h5>
+                  <div class="flex" v-if="isToken === true">
+                    <router-link class="nav-link" v-on:click.native="setModeFormCookingRecipe('update', cookingRecipe._id)" to="#"><b-icon icon="pencil-fill"></b-icon></router-link>
+                    <router-link class="nav-link" to="#" @click.native="deleteCookingRecipe(cookingRecipe)"><b-icon icon="trash-fill"></b-icon></router-link>
                   </div>
+                </div>
               </div>
+            </div>
           </div>
         </div>
     </div>
@@ -118,6 +118,9 @@ export default {
         icon: true,
         rtl: false
       })
+    },
+    replaceByDefaultImage (e) {
+      e.target.src = 'http://www.ipsgroup.fr/wp-content/uploads/2013/12/default_image_01.png'
     }
   }
 }

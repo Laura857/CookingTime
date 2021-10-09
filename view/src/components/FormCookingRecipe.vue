@@ -1,37 +1,39 @@
 <template>
-    <div class="container m-5">
-      <div class="row d-flex justify-content-center">
-        <form class="col-md-4">
-          <h3 v-if="mode === 'update'">Modification recette</h3>
-          <h3 v-else>Création recette</h3>
-          <div class="form-group mt-2">
-            <label>Nom</label>
-            <input v-model="name" type="text" class="form-control form-control-lg" />
-          </div>
+  <div class="container m-5">
+    <div class="row d-flex justify-content-center">
+      <form class="col-md-4">
+        <h3 v-if="mode === 'update'">Modification recette</h3>
+        <h3 v-else>Création recette</h3>
+        <div class="form-group mt-2">
+          <label>Nom</label>
+          <input v-model="name" type="text" class="form-control form-control-lg" />
+        </div>
 
-          <div class="form-group mt-2">
-            <label>Ingrédients</label>
-            <textarea v-model="ingredients" class="form-control form-control-lg" />
-          </div>
+        <div class="form-group mt-2">
+          <label>Ingrédients</label>
+          <textarea v-model="ingredients" class="form-control form-control-lg" />
+        </div>
 
-          <div class="form-group mt-2">
-            <label>Instructions</label>
-            <textarea v-model="instruction" class="form-control form-control-lg" />
-          </div>
+        <div class="form-group mt-2">
+          <label>Instructions</label>
+          <textarea v-model="instruction" class="form-control form-control-lg" />
+        </div>
 
-          <div class="form-group mt-2">
-            <label>Url image</label>
-            <textarea v-model="urlImage" class="form-control form-control-lg" />
-          </div>
-          <button @click.prevent="save()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Sauvegarder</button>
-        </form>
-      </div>
+        <div class="form-group mt-2">
+          <label>Url image</label>
+          <textarea v-model="urlImage" class="form-control form-control-lg" />
+        </div>
+        <button @click.prevent="save()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Sauvegarder</button>
+      </form>
     </div>
+    <div id="threejs" class="flex" style="float: right"></div>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
 import io from 'socket.io-client'
+import * as THREE from 'three'
 
 export default {
   beforeDestroy () {
@@ -73,8 +75,32 @@ export default {
     } else if (localStorage.modeFormCookingRecipe === 'create') {
       this.mode = localStorage.modeFormCookingRecipe
     }
+    this.threejs()
   },
   methods: {
+    threejs () {
+      const scene = new THREE.Scene()
+      const camera = new THREE.PerspectiveCamera(20, 1, 0.1, 2000)
+      scene.background = new THREE.Color('#FFFFFF')
+      const renderer = new THREE.WebGLRenderer()
+      renderer.setSize(100, 100)
+      document.getElementById('threejs').appendChild(renderer.domElement)
+
+      const geometry = new THREE.BoxGeometry()
+      const material = new THREE.MeshBasicMaterial({ color: '#42b983' })
+      const cube = new THREE.Mesh(geometry, material)
+      scene.add(cube)
+
+      camera.position.z = 5
+
+      const animate = function () {
+        requestAnimationFrame(animate)
+        cube.rotation.x += 0.01
+        cube.rotation.y += 0.01
+        renderer.render(scene, camera)
+      }
+      animate()
+    },
     updateCookingRecipe () {
       const id = this.$route.params.id
       const config = {

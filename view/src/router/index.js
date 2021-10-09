@@ -4,7 +4,6 @@ import CookingRecipe from '@/components/CookingRecipe'
 import Login from '@/components/Login.vue'
 import Signup from '@/components/Signup.vue'
 import FormCookingRecipe from '@/components/FormCookingRecipe.vue'
-import ThreeJsVue from '@/components/ThreeJsVue.vue'
 import UpdateUser from '@/components/UpdateUser.vue'
 import UpdatePassword from '@/components/UpdatePassword.vue'
 
@@ -21,11 +20,6 @@ export default new Router({
       path: '/search/:name',
       name: 'CookingRecipe',
       component: CookingRecipe
-    },
-    {
-      path: '/threeJsVue',
-      name: 'ThreeJsVue',
-      component: ThreeJsVue
     },
     {
       path: '/login',
