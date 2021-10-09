@@ -5,16 +5,17 @@
             <h3>Connexion</h3>
 
             <div class="form-group mt-2">
-                <label>Email</label>
-                <input v-model="email" type="email" class="form-control form-control-lg" />
-                <div class="errorMessage">{{ validation.firstError('email') }}</div>
+              <label>Email</label>
+              <input v-model="email" type="email" class="form-control form-control-lg" />
+              <div class="errorMessage">{{ validation.firstError('email') }}</div>
             </div>
 
             <div class="form-group mt-2">
-                <label>Mot de passe</label>
-                <input v-model="password" type="password" class="form-control form-control-lg" />
-                <div class="errorMessage">{{ validation.firstError('password') }}</div>
+              <label>Mot de passe</label>
+              <input v-model="password" type="password" class="form-control form-control-lg" />
+              <div class="errorMessage">{{ validation.firstError('password') }}</div>
             </div>
+
             <p class="errorMessage">{{error}}</p>
             <div class="clearfix">
               <p class="forgot-password mt-2 float-left d-inline-block">
@@ -57,12 +58,12 @@ export default {
       axios
         .post('http://localhost:3000/user/login', postDataLogin)
         .then(response => {
-          console.log('reponse put signup', response)
+          console.log('Réponse de l\'inscription ', response)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('pseudo', response.data.pseudo)
           localStorage.setItem('userId', response.data.userId)
           localStorage.setItem('email', response.data.email)
-          console.log('Après la connexion on a stocké : ', localStorage)
+          console.log('Après la connexion on a stocké le local storage: ', localStorage)
           this.$router.push('/')
           window.location.reload()
         })
@@ -71,7 +72,7 @@ export default {
           if (error.response.data.error != null) {
             this.error = error.response.data.error
           } else {
-            this.error = 'Mot de passe incoo'
+            this.error = 'Mot de passe incorrect'
           }
         })
     }

@@ -4,9 +4,9 @@
         <form class="col-md-4">
           <h3>Inscription</h3>
           <div class="form-group mt-2">
-              <label>Pseudo</label>
-              <p class="errorMessage">{{errorPseudo}}</p>
-              <input v-model="pseudo" type="text" class="form-control form-control-lg" />
+            <label>Pseudo</label>
+            <p class="errorMessage">{{errorPseudo}}</p>
+            <input v-model="pseudo" type="text" class="form-control form-control-lg" />
           </div>
 
           <div class="form-group mt-2">
@@ -17,10 +17,11 @@
           </div>
 
           <div class="form-group mt-2">
-              <label>Mot de passe</label>
-              <input v-model="password" type="password" class="form-control form-control-lg" />
-              <div class="errorMessage">{{ validation.firstError('password') }}</div>
+            <label>Mot de passe</label>
+            <input v-model="password" type="password" class="form-control form-control-lg" />
+            <div class="errorMessage">{{ validation.firstError('password') }}</div>
           </div>
+
           <p class="errorMessage">{{error}}</p>
           <button @click.prevent="signUpPost()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Inscription</button>
         </form>
@@ -61,18 +62,18 @@ export default {
       axios
         .post('http://localhost:3000/user/signup', postDataSignup)
         .then(response => {
-          console.log('reponse put signup', response)
+          console.log('Réponse de l\'inscription ', response)
           // LOGIN
           const postDataLogin = {email: this.email, password: this.password}
           axios
             .post('http://localhost:3000/user/login', postDataLogin)
             .then(response => {
-              console.log('reponse put signup', response)
+              console.log('Réponse de la connexion ', response)
               localStorage.setItem('token', response.data.token)
               localStorage.setItem('pseudo', response.data.pseudo)
               localStorage.setItem('email', response.data.email)
               localStorage.setItem('userId', response.data.userId)
-              console.log('Après la connexion on a stocké : ', localStorage)
+              console.log('Après la connexion on a stocké le local storage: ', localStorage)
               this.$router.push('/')
               window.location.reload()
             })

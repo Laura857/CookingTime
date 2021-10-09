@@ -51,7 +51,7 @@ export default {
     axios
       .get('http://localhost:3000/cookingRecipe')
       .then(response => {
-        console.log('reponse get', response)
+        console.log('Réponse de la recherche de toutes les recettes', response)
         this.cookingRecipes = response.data
       })
       .catch(error => console.log(error))
@@ -81,7 +81,7 @@ export default {
             axios
               .delete('http://localhost:3000/cookingRecipe/' + cookingRecipe._id, config)
               .then(response => {
-                console.log('reponse delete /cookingRecipe', response)
+                console.log('Réponse delete /cookingRecipe', response)
                 window.location.reload()
               })
               .catch(error => console.log(error))
@@ -110,25 +110,24 @@ export default {
 </script>
 
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.flex{
-  display: flex;
-}
-.space-between{
-  justify-content: space-between;
-}
-
+  h1, h2 {
+    font-weight: normal;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: #42b983;
+  }
+  .flex{
+    display: flex;
+  }
+  .space-between{
+    justify-content: space-between;
+  }
 </style>

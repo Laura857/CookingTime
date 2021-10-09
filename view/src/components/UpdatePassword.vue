@@ -40,16 +40,16 @@ export default {
   },
   methods: {
     updatePassword () {
-      const putUpdate = {password: this.password}
+      const updatePasswordData = {password: this.password}
       const id = this.$route.params.id
       const config = {
         headers: { Authorization: `Bearer ${this.token}` }
       }
-      console.log(`Appel update password avec : http://localhost:3000/user/${id}`, putUpdate)
+      console.log(`Appel update password http://localhost:3000/user/${id} avec : `, updatePasswordData)
       axios
-        .put(`http://localhost:3000/user/${id}`, putUpdate, config)
+        .put(`http://localhost:3000/user/${id}`, updatePasswordData, config)
         .then(response => {
-          console.log('reponse update password ', response)
+          console.log('Réponse de la mise à jour du mot de passe ', response)
           this.$router.push('/')
           window.location.reload()
         })
@@ -63,8 +63,8 @@ export default {
 </script>
 
 <style>
-.errorMessage {
-  color: red;
-  margin: 0;
-}
+  .errorMessage {
+    color: red;
+    margin: 0;
+  }
 </style>

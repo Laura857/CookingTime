@@ -4,9 +4,9 @@
         <form class="col-md-4">
           <h3>Modifier le profil</h3>
           <div class="form-group mt-2">
-              <label>Pseudo</label>
-              <p class="errorMessage">{{errorPseudo}}</p>
-              <input v-model="pseudo" type="text" class="form-control form-control-lg" />
+            <label>Pseudo</label>
+            <p class="errorMessage">{{errorPseudo}}</p>
+            <input v-model="pseudo" type="text" class="form-control form-control-lg" />
           </div>
 
           <div class="form-group mt-2">
@@ -53,16 +53,16 @@ export default {
   },
   methods: {
     updateUser () {
-      const putUpdate = {email: this.email, pseudo: this.pseudo}
+      const updateUserData = {email: this.email, pseudo: this.pseudo}
       const id = this.$route.params.id
       const config = {
         headers: { Authorization: `Bearer ${this.token}` }
       }
-      console.log(`Appel update user avec : http://localhost:3000/user/${id}`, putUpdate)
+      console.log(`Appel update user http://localhost:3000/user/${id} avec : `, updateUserData)
       axios
-        .put(`http://localhost:3000/user/${id}`, putUpdate, config)
+        .put(`http://localhost:3000/user/${id}`, updateUserData, config)
         .then(response => {
-          console.log('reponse update user ', response)
+          console.log('Réponse de la mise à jour du profil ', response)
           localStorage.setItem('pseudo', this.pseudo)
           localStorage.setItem('email', this.email)
           this.$router.push('/')
@@ -78,8 +78,8 @@ export default {
 </script>
 
 <style>
-.errorMessage {
-  color: red;
-  margin: 0;
-}
+  .errorMessage {
+    color: red;
+    margin: 0;
+  }
 </style>

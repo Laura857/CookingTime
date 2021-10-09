@@ -5,18 +5,18 @@
           <h3 v-if="mode === 'update'">Modification recette</h3>
           <h3 v-else>Création recette</h3>
           <div class="form-group mt-2">
-              <label>Nom</label>
-              <input v-model="name" type="text" class="form-control form-control-lg" />
+            <label>Nom</label>
+            <input v-model="name" type="text" class="form-control form-control-lg" />
           </div>
 
           <div class="form-group mt-2">
-              <label>Ingrédients</label>
-              <textarea v-model="ingredients" class="form-control form-control-lg" />
+            <label>Ingrédients</label>
+            <textarea v-model="ingredients" class="form-control form-control-lg" />
           </div>
 
           <div class="form-group mt-2">
-              <label>Instructions</label>
-              <textarea v-model="instruction" class="form-control form-control-lg" />
+            <label>Instructions</label>
+            <textarea v-model="instruction" class="form-control form-control-lg" />
           </div>
           <button @click.prevent="save()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Sauvegarder</button>
         </form>
@@ -57,7 +57,7 @@ export default {
       axios
         .get(`http://localhost:3000/cookingRecipe/${id}`)
         .then(response => {
-          console.log('reponse get /cookingRecipe/', id, response)
+          console.log('Réponse get /cookingRecipe/', id, response)
           this.name = response.data.name
           this.ingredients = response.data.ingredients
           this.instruction = response.data.instruction
@@ -78,7 +78,7 @@ export default {
       axios
         .put(`http://localhost:3000/cookingRecipe/${id}`, dataUpdate, config)
         .then(response => {
-          console.log('reponse put cookingRecipe', response)
+          console.log('Réponse put cookingRecipe', response)
           localStorage.removeItem('modeFormCookingRecipe')
           this.socket.emit('notification', `La recette ${this.name} a été modifiée 🤗`)
           this.$router.push('/')
@@ -96,7 +96,7 @@ export default {
       axios
         .post('http://localhost:3000/cookingRecipe/', dataCreate, config)
         .then(response => {
-          console.log('reponse post create cooking recipe', response)
+          console.log('Réponse de la création de recette ', response)
           localStorage.removeItem('modeFormCookingRecipe')
           this.socket.emit('notification', `Une nouvelle recette ${this.name} a été ajoutée 🥰`)
           this.$router.push('/')

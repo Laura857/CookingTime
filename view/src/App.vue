@@ -66,7 +66,7 @@ export default {
     }
   },
   mounted () {
-    console.log('Au chargement de la page : ', localStorage)
+    console.log('Au chargement de la page le local storage est : ', localStorage)
     if (localStorage.token) {
       this.pseudo = localStorage.pseudo
       this.userId = localStorage.userId
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     logout () {
-      console.log('Déconnexion Au revoir')
+      console.log('Déconnexion Au revoir !')
       localStorage.removeItem('pseudo')
       localStorage.removeItem('email')
       localStorage.removeItem('userId')
