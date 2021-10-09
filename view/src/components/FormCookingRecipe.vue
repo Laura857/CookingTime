@@ -18,6 +18,11 @@
             <label>Instructions</label>
             <textarea v-model="instruction" class="form-control form-control-lg" />
           </div>
+
+          <div class="form-group mt-2">
+            <label>Url image</label>
+            <textarea v-model="urlImage" class="form-control form-control-lg" />
+          </div>
           <button @click.prevent="save()" type="submit" class="btn btn-dark btn-lg  mt-2 float-right" style="float: right;">Sauvegarder</button>
         </form>
       </div>
@@ -40,6 +45,7 @@ export default {
       name: '',
       ingredients: '',
       instruction: '',
+      urlImage: '',
       token: '',
       socket: io('http://localhost:3001')
     }
@@ -61,6 +67,7 @@ export default {
           this.name = response.data.name
           this.ingredients = response.data.ingredients
           this.instruction = response.data.instruction
+          this.urlImage = response.data.urlImage
         })
         .catch(error => console.log(error))
     } else if (localStorage.modeFormCookingRecipe === 'create') {
@@ -73,7 +80,7 @@ export default {
       const config = {
         headers: { Authorization: `Bearer ${this.token}` }
       }
-      const dataUpdate = {name: this.name, ingredients: this.ingredients, instruction: this.instruction}
+      const dataUpdate = {name: this.name, ingredients: this.ingredients, instruction: this.instruction, urlImage: this.urlImage}
       console.log('Appel put update cooking recipe avec : ', dataUpdate)
       axios
         .put(`http://localhost:3000/cookingRecipe/${id}`, dataUpdate, config)
@@ -88,7 +95,7 @@ export default {
         })
     },
     createCookingRecipe () {
-      const dataCreate = {name: this.name, ingredients: this.ingredients, instruction: this.instruction}
+      const dataCreate = {name: this.name, ingredients: this.ingredients, instruction: this.instruction, urlImage: this.urlImage}
       const config = {
         headers: { Authorization: `Bearer ${this.token}` }
       }

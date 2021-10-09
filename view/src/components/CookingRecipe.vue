@@ -11,7 +11,8 @@
       <div class="row">
           <div v-for="cookingRecipe in cookingRecipes" v-bind:key="cookingRecipe._id" class="col-md-3 col-6 my-1">
               <div class="card h-100">
-                  <img src="https://picsum.photos/600/300/?image=25" class="card-img-top">
+                  <img v-if="cookingRecipe.urlImage" :src="cookingRecipe.urlImage" class="card-img-top">
+                  <img v-else src="https://assets.afcdn.com/recipe/20200206/107152_w1024h1024c1cx176cy267.webp" class="card-img-top">
                   <div class="card-body" style="align-items: baseline;">
                     <div class="card-title flex space-between">
                       <h5>{{ cookingRecipe.name }}</h5>
@@ -142,5 +143,12 @@ export default {
   }
   .space-between{
     justify-content: space-between;
+  }
+  img {
+    display: block;
+    max-width:304px;
+    max-height:304px;
+    width: 304px;
+    height: 304px;
   }
 </style>
