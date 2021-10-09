@@ -85,7 +85,7 @@ export default {
     },
     search () {
       if (this.searchField) {
-        this.$router.push(`/${this.searchField}`)
+        this.$router.push(`/search/${this.searchField}`)
         window.location.reload()
       }
     }

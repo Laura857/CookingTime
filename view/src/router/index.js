@@ -18,7 +18,7 @@ export default new Router({
       component: CookingRecipe
     },
     {
-      path: '/:name',
+      path: '/search/:name',
       name: 'CookingRecipe',
       component: CookingRecipe
     },
