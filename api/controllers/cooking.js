@@ -1,49 +1,44 @@
 const CookingRecipe = require('../models/CookingRecipe')
 
 exports.createCookingRecipe = (req,res,next)=>{
-    console.log("post save cooking recipe")
-    const postObject = req.body
-    delete postObject._id;
-    const p = new CookingRecipe({
-        ...postObject
-        // urlImage: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    console.log("Sauvegarde d\'une nouvelle recette")
+    const cookingRecipeDate = req.body
+    delete cookingRecipeDate._id;
+    const newCookingRecipe = new CookingRecipe({
+        ...cookingRecipeDate
     })
-    p.save()
-        .then(() => res.status(201).json({message : 'ok'}))
+    newCookingRecipe.save()
+        .then(() => res.status(201).json({message : 'Nouvelle recette enregistrée !'}))
         .catch(error => res.status(400).json({ error}))
 }
 
 exports.updateCookingRecipeId =(req,res,next)=>{
-    console.log('put update cooking recipe')
+    console.log("Mise à jour d\'une recette")
     CookingRecipe.updateOne({_id: req.params.id},{...req.body, _id: req.params.id})
-        .then(()=> res.status(200).json({message: 'ok'}))
+        .then(()=> res.status(200).json({message: 'La recette a été mise à jour.'}))
         .catch(()=> res.status(400).json({ error}))
 }
 
 exports.deleteCookingRecipeId =(req,res,next)=>{
-    console.log('delete cooking recipe')
+    console.log("Suppression d\'une recette")
     CookingRecipe.findOne({_id:req.param.id})
-        .then( cookingRecipe => {
-            // const filename = post.urlImage.split('/images/')[1]
-            // fs.unlink(`images/${filename}`,()=>{
-                CookingRecipe.deleteOne({_id: req.params.id})
-                    .then(()=> res.status(200).json({message: 'ok'}))
-                    .catch(error => res.status(400).json({error}))
-            })
-        // })
+        .then(CookingRecipe.deleteOne({_id: req.params.id})
+                .then(()=> res.status(200).json({message: 'Le recette a été supprimée.'}))
+                .catch(error => res.status(400).json({error}))
+        )
         .catch(error => res.status(500).json({error}))  
 }
 
 exports.getCookingRecipeId = (req,res,next)=>{
-    console.log('get cooking recipe id')
+    console.log("Recherche d\'une recette")
     CookingRecipe.findOne({_id:req.params.id})
         .then(cookingRecipe=> res.status(200).json(cookingRecipe))
-        .catch(error => res.status(404).json({error}));
+        .catch(error => res.status(404).json({error}))
 }
 
 exports.getAllCookingRecipe = (req,res,next)=> {
-    console.log('get all cooking recipe')
+    console.log("Recherche de toutes les recettes")
     CookingRecipe.find()
         .then(cookingRecipe => res.status(200).json(cookingRecipe))
-        .catch(error=> res.status(400).json({error}));
+        .catch(error=> res.status(400).json({error}))
 }

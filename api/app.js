@@ -17,10 +17,7 @@ mongoose.connect('mongodb+srv://laura:nodejslaura@clusternode.5hfkv.mongodb.net/
 })
 .then(()=> console.log("db valid"))
 .catch(()=> console.log("db error"))
-/*
-app.use('/',(req, res,next) =>{
-    res.json({message: "oklm"})
-})*/
+
 app.use((req,res,next)=> {
     res.setHeader('Access-Control-Allow-Origin','*')
     res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content,Accept,Content-Type,Authorization')//permet de stocket des choses dans le headers
@@ -32,8 +29,8 @@ app.use(express.json())
 app.use(express.urlencoded({
     extended :true
 }))
-app.use('/cookingRecipe',cookingRecipeRoutes)
-app.use('/user',userRoutes)
+app.use('/cookingRecipe', cookingRecipeRoutes)
+app.use('/user', userRoutes)
 
 io.on('connection', (socket) => {
     console.log(`Connecté au client ${socket.id}`)
