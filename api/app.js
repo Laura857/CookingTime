@@ -10,13 +10,13 @@ const io = require("socket.io")(server, {
     }
 })
 
-mongoose.connect('mongodb+srv://laura:nodejslaura@clusternode.5hfkv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', // lie le cluster à l'app
+mongoose.connect('mongodb+srv://laura:nodejslaura@cluster0.b6pps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', // lie le cluster à l'app
 {
     useNewUrlParser: true,
     useUnifiedTopology:true
 })
 .then(()=> console.log("db valid"))
-.catch(()=> console.log("db error"))
+.catch(error=> console.error(error))
 
 app.use((req,res,next)=> {
     res.setHeader('Access-Control-Allow-Origin','*')
